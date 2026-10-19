@@ -3,12 +3,14 @@
 Verejné úložisko inštalačných balíčkov (.apk) aplikácie **Discover** pre Android.
 
 ## 📱 Najnovšia verzia
-- **[Stiahnuť najnovšiu verziu (Discover-latest.apk)](https://github.com/frodo21/Discover_public/raw/main/Discover-latest.apk)**
+- **[Stiahnuť najnovšiu verziu (Discover-latest.apk)](https://github.com/frodo21/Discover_public/raw/main/Discover-latest.apk)** (v1.2.0)
 
 ## 📦 Zoznam vydaní
-- **v1.1.0** (Aktuálna)
+- **v1.2.0** (Najnovšia)
+  - [Discover-v1.2.0.apk](https://github.com/frodo21/Discover_public/raw/main/archive/Discover-v1.2.0.apk)
+  - Zmeny: Zvýšená verzia 1.2, optimalizácia feedu, Android Material You témovaná ikona, priame in-app sťahovanie aktualizácií.
+- **v1.1.0**
   - [Discover-v1.1.0.apk](https://github.com/frodo21/Discover_public/raw/main/archive/Discover-v1.1.0.apk)
-  - Novinky: Material You tématická ikona, plynulý feed bez sekania, nastavenie veľkosti obrázkov, zmena písma, automatické vymazanie po prečítaní, TTS prehrávač s rýchlosťami 1x-2.5x, priame sťahovanie aktualizácií.
 
 ## 🔄 Automatické aktualizácie
-Aplikácia Discover nainštalovaná v mobilnom zariadení automaticky kontroluje toto úložisko cez GitHub API a umožňuje priamu inštaláciu nových verzií bez potreby manuálneho sťahovania z prehliadača.
+Aplikácia Discover nainštalovaná v mobile automaticky kontroluje toto úložisko cez GitHub Releases API aj priame súbory v repozitári a umožňuje bezproblémovú inštaláciu bez otvárania prehliadača.
