@@ -14,3 +14,7 @@ Verejné úložisko inštalačných balíčkov (.apk) aplikácie **Discover** pr
 
 ## 🔄 Automatické aktualizácie
 Aplikácia Discover nainštalovaná v mobile automaticky kontroluje toto úložisko cez GitHub Releases API aj priame súbory v repozitári a umožňuje bezproblémovú inštaláciu bez otvárania prehliadača.
+
+## 🔒 Ochrana súkromia / Privacy Policy
+- **[Pravidlá ochrany súkromia / Privacy Policy](PRIVACY_POLICY.md)**
+Aplikácia Discover News nezhromažďuje žiadne osobné údaje používateľov. Všetky nastavenia, história čítania a záložky sú ukladané výhradne lokálne vo vašom zariadení.
