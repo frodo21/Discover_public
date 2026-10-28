@@ -2,8 +2,10 @@
 
 **Application Name:** Discover News (Discover)  
 **Package Name:** `com.aistudio.cleandiscover.xwqz`  
-**Effective Date:** October 26, 2026  
-**Contact Email:** fmarasf@gmail.com  
+**Effective Date:** October 28, 2026  
+**Developer / Prevádzkovateľ:** JWorks s.r.o.  
+**Contact Email:** jworks.s.r.o@gmail.com  
+**Phone:** +421 951 039 735  
 
 ---
 
@@ -15,7 +17,7 @@
 ## Privacy Policy (English)
 
 ### 1. Introduction & Overview
-This Privacy Policy governs the use of the **Discover News** mobile application ("the Application", "we", "our") developed for Android. We respect your privacy and are committed to protecting it. 
+This Privacy Policy governs the use of the **Discover News** mobile application ("the Application", "we", "our") developed for Android by **JWorks s.r.o.** We respect your privacy and are committed to protecting it. 
 
 **Discover News is designed with a strict privacy-first philosophy.** The Application does not require user registration, does not create user profiles, does not sell or transfer user data, and does not use any third-party advertising or commercial tracking frameworks.
 
@@ -37,7 +39,6 @@ The Application connects to the internet strictly to perform user-requested func
 The Application requests only the minimal permissions required for its functionality:
 - `android.permission.INTERNET`: Required to download public news feeds, article content, and check for app updates.
 - `android.permission.ACCESS_NETWORK_STATE`: Used to detect whether an active Wi-Fi or mobile data connection exists before initiating network requests.
-- `android.permission.REQUEST_INSTALL_PACKAGES`: Used only when the user chooses to download and install an in-app software update.
 - `android.permission.POST_NOTIFICATIONS`: Used on Android 13+ solely to inform the user of completed background updates.
 
 The Application **does NOT request or access:**
@@ -68,7 +69,9 @@ We may periodically update this Privacy Policy. The latest version will always b
 
 ### 9. Contact Us
 If you have questions, feedback, or concerns regarding this Privacy Policy or your privacy while using Discover News, please contact us at:  
-**Email:** `fmarasf@gmail.com`
+**Company:** JWorks s.r.o.  
+**Email:** `jworks.s.r.o@gmail.com`  
+**Phone:** `+421 951 039 735`  
 
 ---
 
@@ -76,7 +79,7 @@ If you have questions, feedback, or concerns regarding this Privacy Policy or yo
 ## Pravidlá ochrany súkromia (Slovenská verzia)
 
 ### 1. Úvod a základné zásady
-Tieto Pravidlá ochrany súkromia upravujú používanie mobilnej aplikácie **Discover News** (ďalej len „Aplikácia“) pre systém Android. Rešpektujeme vaše súkromie a kladieme dôraz na maximálnu ochranu vašich osobných údajov.
+Tieto Pravidlá ochrany súkromia upravujú používanie mobilnej aplikácie **Discover News** (ďalej len „Aplikácia“) pre systém Android spoločnosťou **JWorks s.r.o.** Rešpektujeme vaše súkromie a kladieme dôraz na maximálnu ochranu vašich osobných údajov.
 
 **Aplikácia Discover News je postavená na prísnom princípe ochrany súkromia (Privacy by Design).** Aplikácia nevyžaduje žiadnu registráciu ani prihlasovanie, nevytvára používateľské profily, nepredáva ani neposkytuje žiadne údaje tretím stranám a neobsahuje žiadne reklamné ani analytické sledovacie nástroje (trackery).
 
@@ -98,7 +101,6 @@ Aplikácia využíva pripojenie na internet výhradne na vykonanie funkcií pož
 Aplikácia požaduje len minimálne systémové oprávnenia nevyhnutné na jej fungovanie:
 - `android.permission.INTERNET`: Nevyhnutné na sťahovanie verejných RSS správ, textu článkov a kontrolu aktualizácií.
 - `android.permission.ACCESS_NETWORK_STATE`: Na zistenie dostupnosti siete (Wi-Fi / mobilné dáta) pred začatím sťahovania.
-- `android.permission.REQUEST_INSTALL_PACKAGES`: Používa sa len pri manuálnom spustení inštalácie aktualizácie aplikácie.
 - `android.permission.POST_NOTIFICATIONS`: V systéme Android 13+ slúži výlučne na informovanie o dokončení sťahovania aktualizácie.
 
 Aplikácia **nepožaduje ani nepristupuje k:**
@@ -125,4 +127,6 @@ Aplikácia nezhromažďuje žiadne osobné údaje a je bezpečná pre používat
 
 ### 8. Kontakt a otázky
 V prípade akýchkoľvek otázok alebo nejasností týkajúcich sa týchto pravidiel ochrany súkromia nás môžete kontaktovať na:  
-**E-mail:** `fmarasf@gmail.com`
+**Spoločnosť:** JWorks s.r.o.  
+**E-mail:** `jworks.s.r.o@gmail.com`  
+**Telefón:** `+421 951 039 735`  

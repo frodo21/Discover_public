@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover News – Správy bez reklám a RSS agregátor | JWorks s.r.o.</title>
+    <meta name="description" content="Discover News je moderný RSS agregátor správ pre Android s čitateľským režimom bez reklám. Vyvinuté spoločnosťou JWorks s.r.o.">
+    <meta name="author" content="JWorks s.r.o.">
+    <link rel="icon" type="image/png" href="../ic_launcher_play_store_512.png">
+    <style>
+        :root {
+            --primary: #00796B;
+            --primary-dark: #004D40;
+            --primary-light: #E0F2F1;
+            --accent: #00897B;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --bg-body: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --border: #E2E8F0;
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #26A69A;
+                --primary-dark: #004D40;
+                --primary-light: #132E2B;
+                --accent: #4DB6AC;
+                --text-main: #F1F5F9;
+                --text-muted: #94A3B8;
+                --bg-body: #0F172A;
+                --bg-card: #1E293B;
+                --border: #334155;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            header {
+                background: rgba(15, 23, 42, 0.85);
+            }
+        }
+
+        .nav-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .hero {
+            padding: 70px 0 50px;
+            text-align: center;
+        }
+
+        .badge-pill {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 121, 107, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 18px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 720px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 26px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 121, 107, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent);
+            color: #ffffff;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-card);
+            border-color: var(--primary);
+            text-decoration: none;
+        }
+
+        section {
+            padding: 50px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .contact-box {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            margin-top: 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: var(--bg-body);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+
+        .contact-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+            padding-top: 4px;
+        }
+
+        .contact-details h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .contact-details .value {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            word-break: break-all;
+        }
+
+        .contact-details p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .policy-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            margin-bottom: 24px;
+        }
+
+        .policy-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 14px;
+            color: var(--primary);
+        }
+
+        .policy-card p, .policy-card li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .policy-card ul {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            background: var(--bg-card);
+            padding: 40px 0;
+            margin-top: 50px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .contact-box {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Header -->
+    <header>
+        <div class="container nav-wrap">
+            <a href="#" class="brand">
+                <img src="../ic_launcher_play_store_512.png" alt="Discover News Logo">
+                <span>Discover News</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Funkcie</a></li>
+                <li><a href="#news-policy">Spravodajská politika</a></li>
+                <li><a href="#contact">Kontaktujte nás</a></li>
+                <li><a href="#privacy-policy">Ochrana súkromia</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <span class="badge-pill">🗞️ Nezávislý RSS Agregátor Správ pre Android</span>
+            <h1>Vaše obľúbené správy.<br><span style="color: var(--primary);">Bez reklám a balastu.</span></h1>
+            <p>
+                Discover News prináša čistý, bleskurýchly a nerušený zážitok z čítania správ z overených slovenských, českých a svetových médií. Ukladanie článkov offline, podpora vlastných RSS kanálov a ochrana vášho súkromia.
+            </p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary">Kontaktovať vývojára</a>
+                <a href="#news-policy" class="btn btn-outline">Spravodajské štandardy</a>
+                <a href="#privacy-policy" class="btn btn-outline">Zásady súkromia</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Prečo si vybrať Discover News?</h2>
+                <p>Navrhnuté pre čitateľov, ktorí si cenia kvalitný obsah a rešpekt voči súkromiu.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>Bezreklamný čitateľský režim</h3>
+                    <p>Inteligentné extrahovanie čistého textu a hlavných fotografií bez vyskakovacích okien, bannerov a rušivých prvkov.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Podpora overených a vlastných RSS</h3>
+                    <p>Prednastavené kategórie (Domáce, Svet, Ekonomika, Šport, Technológie) s možnosťou pridať akýkoľvek vlastný RSS / Atom kanál.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Súkromie a offline ukladanie</h3>
+                    <p>Žiadne sledovanie, profilovanie ani odosielanie osobných dát na servery. Všetky vaše uložené články a história zostávajú výlučne vo vašom telefóne.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎧</div>
+                    <h3>Hlasové čítanie (Text-to-Speech)</h3>
+                    <p>Počúvajte články na cestách s integrovaným prehrávačom reči v rodnom jazyku článku.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Prispôsobenie na mieru</h3>
+                    <p>Svetlý, tmavý, AMOLED a sépiový motív, výber obľúbenej akcentovej farby a plynulé nastavenie veľkosti písma.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Priama atribúcia a odkazy</h3>
+                    <p>Každý článok jasne uvádza pôvodného vydavateľa, čas vydania a priamy odkaz na pôvodný webový zdroj.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Policy / Spravodajská politika (MANDATORY FOR GOOGLE PLAY NEWS POLICY) -->
+    <section id="news-policy">
+        <div class="container">
+            <div class="section-header">
+                <h2>Spravodajská politika a autorské práva</h2>
+                <p>Záväzok k transparentnosti, férovému odkazovaniu a dodržiavaniu zásad Google Play News Policy.</p>
+            </div>
+
+            <div class="policy-card">
+                <h3>1. Povaha a poslanie aplikácie ako spravodajského agregátora</h3>
+                <p>
+                    Aplikácia <strong>Discover News</strong> slúži ako osobná čítačka správ a RSS agregátor. Aplikácia nepublikuje vlastný spravodajský obsah ani redakčné stanoviská, ale umožňuje používateľom na jednom mieste prehliadať a sledovať verejne dostupné RSS / Atom spravodajské kanály tretích strán.
+                </p>
+            </div>
+
+            <div class="policy-card">
+                <h3>2. Ochrana autorských práv a atribúcia pôvodných vydavateľov</h3>
+                <p>
+                    Všetky články, titulky, anotácie a fotografie zobrazené v aplikácii zostávajú výlučným duševným vlastníctvom ich príslušných pôvodných autorov a vydavateľstiev (napr. SME, Denník N, Aktuality.sk, Pravda, ČTK, TASR, Reuters, BBC atď.).
+                </p>
+                <ul>
+                    <li>Každý článok v aplikácii je <strong>vždy jasne a viditeľne označený názvom pôvodného média</strong> a doménou zdroja.</li>
+                    <li>V čitateľskom režime má používateľ k dispozícii <strong>priame tlačidlo na otvorenie článku na pôvodnom webe vydavateľa</strong>.</li>
+                    <li>Aplikácia nemení obsah správ ani nezasahuje do zmyslu pôvodného autorského textu.</li>
+                </ul>
+            </div>
+
+            <div class="policy-card">
+                <h3>3. Žiadosti o úpravu alebo odstránenie kanála (Takedown & Correction Requests)</h3>
+                <p>
+                    Vydavatelia a držitelia autorských práv majú kedykoľvek právo požiadať o úpravu prezentácie alebo úplné vyradenie svojho RSS kanála z predvoleného zoznamu zdrojov aplikácie. Vašej žiadosti vyhovieme bezodkladne, najneskôr do 48 hodín od doručenia.
+                </p>
+                <p>
+                    Oficiálny kontakt pre redakcie a vydavateľov: <a href="mailto:jworks.s.r.o@gmail.com"><strong>jworks.s.r.o@gmail.com</strong></a> alebo telefonicky na <a href="tel:+421951039735"><strong>+421 951 039 735</strong></a>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section (MANDATORY FOR GOOGLE PLAY DEVELOPER CONTACT) -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Kontaktujte nás / Developer Contact</h2>
+                <p>Platné a overiteľné kontaktné údaje vývojára a prevádzkovateľa aplikácie Discover News.</p>
+            </div>
+
+            <div class="contact-box">
+                <div style="text-align: center; max-width: 650px; margin: 0 auto;">
+                    <span style="font-size: 2.5rem;">🏢</span>
+                    <h3 style="font-size: 1.6rem; margin-top: 10px; margin-bottom: 8px;">JWorks s.r.o.</h3>
+                    <p style="color: var(--text-muted); font-size: 1rem;">
+                        Vývojár mobilných aplikácií a prevádzkovateľ služby Discover News.<br>
+                        Oficiálny kontakt pre používateľskú podporu, redakcie spravodajských médií a Google Play Console.
+                    </p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-details">
+                            <h4>Oficiálny e-mail vývojára</h4>
+                            <div class="value">
+                                <a href="mailto:jworks.s.r.o@gmail.com">jworks.s.r.o@gmail.com</a>
+                            </div>
+                            <p>Prioritná odpoveď na otázky používateľov a redakcií do 24 hodín.</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h4>Telefónny kontakt</h4>
+                            <div class="value">
+                                <a href="tel:+421951039735">+421 951 039 735</a>
+                            </div>
+                            <p>Dostupnosť v pracovné dni od 09:00 do 17:00 (CET).</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h4>Sídlo a registrácia</h4>
+                            <div class="value">Slovenská republika</div>
+                            <p>JWorks s.r.o., zapísaná v Obchodnom registri SR.</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">🌐</div>
+                        <div class="contact-details">
+                            <h4>Verejný GitHub repozitár</h4>
+                            <div class="value">
+                                <a href="https://github.com/frodo21/Discover_public" target="_blank" rel="noopener">frodo21/Discover_public</a>
+                            </div>
+                            <p>Zdrojové kódy, dokumentácia a vydania aplikácie.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Policy / Zásady ochrany osobných údajov -->
+    <section id="privacy-policy">
+        <div class="container">
+            <div class="section-header">
+                <h2>Zásady ochrany osobných údajov (Privacy Policy)</h2>
+                <p>Platné od: 1. januára 2026 | Posledná aktualizácia: 28. októbra 2026</p>
+            </div>
+
+            <div class="policy-card">
+                <h3>1. Základné ustanovenia a prevádzkovateľ</h3>
+                <p>
+                    Prevádzkovateľom aplikácie <strong>Discover News</strong> je spoločnosť <strong>JWorks s.r.o.</strong>, so sídlom v Slovenskej republike, e-mail: <a href="mailto:jworks.s.r.o@gmail.com">jworks.s.r.o@gmail.com</a>, telefón: <a href="tel:+421951039735">+421 951 039 735</a> (ďalej len „prevádzkovateľ“). Tieto zásady opisujú, ako aplikácia zaobchádza s údajmi používateľov.
+                </p>
+            </div>
+
+            <div class="policy-card">
+                <h3>2. Zhromažďovanie a spracúvanie údajov</h3>
+                <p>
+                    Aplikácia Discover News bola navrhnutá s dôrazom na maximálne súkromie používateľov (Privacy by Design):
+                </p>
+                <ul>
+                    <li><strong>Žiadne osobné údaje:</strong> Aplikácia nepožaduje vytvorenie používateľského účtu, registráciu, meno, prihlasovacie heslá ani platobné údaje.</li>
+                    <li><strong>Výlučne lokálne ukladanie:</strong> Zoznam vašich obľúbených zdrojov, uložené články a história čítania sa ukladajú výhradne lokálne vo vašom zariadení (prostredníctvom lokálnej databázy SQLite/Room). Tieto údaje neopúšťajú vaše zariadenie a prevádzkovateľ k nim nemá žiaden prístup.</li>
+                    <li><strong>Žiadny predaj údajov:</strong> Prevádzkovateľ nepredáva, neprenajíma ani neposkytuje žiadne údaje o používateľoch tretím stranám.</li>
+                </ul>
+            </div>
+
+            <div class="policy-card">
+                <h3>3. Systémové povolenia zariadenia</h3>
+                <p>
+                    Aplikácia vyžaduje iba minimálne technické povolenia nevyhnutné pre jej správne fungovanie:
+                </p>
+                <ul>
+                    <li><code>android.permission.INTERNET</code> – Nevyhnutné pre sťahovanie verejne publikovaných RSS feedov a zobrazenie článkov zo zdrojov vybraných používateľom.</li>
+                    <li><code>android.permission.ACCESS_NETWORK_STATE</code> – Umožňuje aplikácii zistiť, či je zariadenie pripojené k internetu (Wi-Fi / mobilné dáta), a zabrániť zbytočným chybovým hláseniam pri offline režime.</li>
+                </ul>
+                <p>Aplikácia nevyžaduje prístup k polohe, fotoaparátu, mikrofónu, kontaktom ani úložisku zariadenia.</p>
+            </div>
+
+            <div class="policy-card">
+                <h3>4. Služby a obsah tretích strán</h3>
+                <p>
+                    Aplikácia načítava a zobrazuje verejne dostupné RSS kanály priamo zo serverov jednotlivých vydavateľov. Pri otvorení externého webového článku cez prehliadač sa spracovanie údajov riadi zásadami ochrany osobných údajov daného webového portálu.
+                </p>
+            </div>
+
+            <div class="policy-card">
+                <h3>5. Ochrana súkromia detí</h3>
+                <p>
+                    Naša aplikácia nezhromažďuje vedome žiadne osobné identifikačné údaje od detí mladších ako 13 rokov (alebo príslušného veku v zmysle lokálnej legislatívy) a spĺňa všetky požiadavky programu Google Play Families Policy.
+                </p>
+            </div>
+
+            <div class="policy-card">
+                <h3>6. Práva používateľov a kontakt</h3>
+                <p>
+                    Používateľ má kedykoľvek možnosť vymazať celú históriu čítania, uložené články a nastavenia priamo v aplikácii alebo vymazaním vyrovnávacej pamäte a dát aplikácie v nastaveniach systému Android. V prípade akýchkoľvek otázok ohľadom ochrany osobných údajov nás kontaktujte na:
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>JWorks s.r.o.</strong><br>
+                    E-mail: <a href="mailto:jworks.s.r.o@gmail.com">jworks.s.r.o@gmail.com</a><br>
+                    Telefón: <a href="tel:+421951039735">+421 951 039 735</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>Discover News</strong> – RSS spravodajský agregátor a čítačka pre Android</p>
+            <p>© 2026 <strong>JWorks s.r.o.</strong> Všetky práva vyhradené.</p>
+            <p>Kontakt: <a href="mailto:jworks.s.r.o@gmail.com">jworks.s.r.o@gmail.com</a> | Tel: <a href="tel:+421951039735">+421 951 039 735</a></p>
+            <p style="margin-top: 10px;">
+                <a href="#features">Funkcie</a> · 
+                <a href="#news-policy">Spravodajská politika</a> · 
+                <a href="#contact">Kontakt</a> · 
+                <a href="#privacy-policy">Privacy Policy</a> · 
+                <a href="https://github.com/frodo21/Discover_public" target="_blank" rel="noopener">GitHub Repozitár</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
