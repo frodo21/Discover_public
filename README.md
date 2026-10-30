@@ -3,11 +3,11 @@
 Verejné úložisko inštalačných balíčkov (.apk) aplikácie **Discover** pre Android.
 
 ## 📱 Najnovšia verzia
-- **[Stiahnuť najnovšiu verziu (Discover-latest.apk)](https://github.com/frodo21/Discover_public/raw/main/Discover-latest.apk)** (v39.0.0)
+- **[Stiahnuť najnovšiu verziu (Discover-latest.apk)](https://github.com/frodo21/Discover_public/raw/main/Discover-latest.apk)** (v40.0.0)
 
 ## 📦 Zoznam vydaní
-- **v39.0.0** (Najnovšia)
-  - [Discover-v39.0.0.apk](https://github.com/frodo21/Discover_public/raw/main/archive/Discover-v39.0.0.apk)
+- **v40.0.0** (Najnovšia)
+  - [Discover-v40.0.0.apk](https://github.com/frodo21/Discover_public/raw/main/archive/Discover-v40.0.0.apk)
   - Zmeny: Architektúra tém (Feed vs Článok 'Podľa aplikácie'), vlastná akcentová farba + Logo Teal, dynamický toolbar na vrchu, rozšírené zdroje a alternatíva s hľadaním, plynulý predictive back s paralaxou.
 - **v2.2.0**
   - [Discover-v2.2.0.apk](https://github.com/frodo21/Discover_public/raw/main/archive/Discover-v2.2.0.apk)
